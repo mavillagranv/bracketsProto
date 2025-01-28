@@ -1,3 +1,137 @@
-@for(iTeamUnit of $intrestedTeams;track $index){
-<button mat-button (click)="openDialog(iTeamUnit)">Contact teams dialog</button>
-}
+<!--
+  File name: Bracket start (Main view)
+  Creation Date: 01/27/2025
+  Last Modified: 01-28-2025
+  Created by: Samuel
+  Modified by: Samuel
+-->
+<div class="container">
+    <div class="header">
+        <div class="rowHeader">
+            <div class="col">
+                <img class="userImage" [src]="$event.eventLogo" height="47px" />
+            </div>
+            <div class="col">
+                <div class="header">
+                    <h2>Edit Events</h2>
+                    <h3>Event name: {{ $event.eventName }}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <img src="https://firebasestorage.googleapis.com/v0/b/astrohoopz-6b201.appspot.com/o/eventLogos%2FTPnWouwg61Fv4xaR5m1L.png?alt=media&amp;token=01c30c7f-317e-422e-9aed-ef34a7b7ce5f"
+                    height="47px" />
+            </div>
+        </div>
+    </div>
+    <div class="options">
+        <div class="rowOptions">
+            <div class="colTeamInfo">
+                <label for="teamRegisterLabel">Team Register: {{ $registeredTeams.length }}
+                </label>
+                <br />
+                <label for="teamInteresteLabel">Interested teams: {{ $intrestedTeams.length }}
+                </label>
+                <br />
+                <br />
+                @for(iTeamUnit of $intrestedTeams;track $index){
+                <div>
+                    <button mat-fab extended class="contactButton" (click)="openDialog(iTeamUnit)">
+                        <mat-icon>message</mat-icon> Contact with the interested teams
+                    </button>
+                </div>
+                }
+            </div>
+            <div class="colEventImage">
+                <img _ngcontent-ng-c3499084749=""
+                    src="https://firebasestorage.googleapis.com/v0/b/astrohoopz-6b201.appspot.com/o/eventLogos%2FTPnWouwg61Fv4xaR5m1L.png?alt=media&amp;token=01c30c7f-317e-422e-9aed-ef34a7b7ce5f" />
+            </div>
+            <div class="colDivisions">
+                <mat-form-field appearance="fill" class="combo-box">
+                    <mat-label>Category</mat-label>
+                    <select [(ngModel)]="selectedDivision" (change)="onSelectionChange(selectedDivision)"
+                        matNativeControl required>
+                        @for (category of $event.eventCategories; track $index) {
+                        <option [value]="category.code">{{category.category}}/{{category.gender}}</option>
+                        }
+                    </select>
+                </mat-form-field>
+                <p>{{selectedDivision}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="bracketsList">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Round Robin</mat-card-title>
+                <mat-card-subtitle>In a Round Robin tournament, every team plays against every other
+                    team at least once. The team with the most wins or points at the end
+                    is declared the winner. This system ensures fairness, as every team
+                    has the chance to compete with all the others.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="cardContent">
+                <div class="card-image">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/astrohoopz-6b201.appspot.com/o/eventLogos%2FTPnWouwg61Fv4xaR5m1L.png?alt=media&amp;token=01c30c7f-317e-422e-9aed-ef34a7b7ce5f"
+                        class="image-right" />
+                </div>
+                <div class="card-button">
+                    <button mat-raised-button color="primary">Click Me</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Round Robin</mat-card-title>
+                <mat-card-subtitle>In a Round Robin tournament, every team plays against every other
+                    team at least once. The team with the most wins or points at the end
+                    is declared the winner. This system ensures fairness, as every team
+                    has the chance to compete with all the others.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="cardContent">
+                <div class="card-image">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/astrohoopz-6b201.appspot.com/o/eventLogos%2FTPnWouwg61Fv4xaR5m1L.png?alt=media&amp;token=01c30c7f-317e-422e-9aed-ef34a7b7ce5f"
+                        class="image-right" />
+                </div>
+                <div class="card-button">
+                    <button mat-raised-button color="primary">Click Me</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Round Robin</mat-card-title>
+                <mat-card-subtitle>In a Round Robin tournament, every team plays against every other
+                    team at least once. The team with the most wins or points at the end
+                    is declared the winner. This system ensures fairness, as every team
+                    has the chance to compete with all the others.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="cardContent">
+                <div class="card-image">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/astrohoopz-6b201.appspot.com/o/eventLogos%2FTPnWouwg61Fv4xaR5m1L.png?alt=media&amp;token=01c30c7f-317e-422e-9aed-ef34a7b7ce5f"
+                        class="image-right" />
+                </div>
+                <div class="card-button">
+                    <button mat-raised-button color="primary">Click Me</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Round Robin</mat-card-title>
+                <mat-card-subtitle>In a Round Robin tournament, every team plays against every other
+                    team at least once. The team with the most wins or points at the end
+                    is declared the winner. This system ensures fairness, as every team
+                    has the chance to compete with all the others.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="cardContent">
+                <div class="card-image">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/astrohoopz-6b201.appspot.com/o/eventLogos%2FTPnWouwg61Fv4xaR5m1L.png?alt=media&amp;token=01c30c7f-317e-422e-9aed-ef34a7b7ce5f"
+                        class="image-right" />
+                </div>
+                <div class="card-button">
+                    <button mat-raised-button color="primary">Click Me</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <br />
+</div>

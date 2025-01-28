@@ -1,0 +1,126 @@
+.container {
+    margin: 1rem;
+  }
+  //header
+  .rowHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h2 {
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+    color: #002a5c;
+    font-family: nasalization, sans-serif !important;
+  }
+  
+  h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #002a5c;
+    text-align: center;
+  }
+  .profile-image,
+  .company-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    align-items: center;
+    object-fit: cover;
+  }
+  //options
+  .rowOptions {
+    grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+    align-items: center;
+    gap: 16px;
+  }
+  .options {
+    justify-content: space-between;
+    margin: 0 1rem;
+  }
+  .colEventImage {
+    text-align: center;
+    flex: 0 0 300px;
+  }
+  .colTeamInfo {
+    text-align: center;
+    flex: 1;
+    margin: 0 1rem;
+  }
+  .colDivisions {
+    text-align: center;
+    flex: 1;
+    margin: 0 1rem;
+  }
+  .contactButton {
+    background-color: #002a5c;
+    color: white;
+    font-size: 12px;
+    height: 36px;
+  }
+  .contactButton:hover {
+    background-color: #001a2a;
+  }
+  //BracketCard
+  .colCard {
+    flex: 1;
+    padding: 10px;
+  }
+  .bracketsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 3rem 0;
+    border: 2px solid #002a5c;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .example-card {
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin-bottom: 15px;
+  }
+  .cardContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-button {
+    flex: 0 0 auto;
+  }
+  
+  .card-image {
+    flex: 0 0 auto;
+    text-align: right;
+  }
+  
+  .image-right {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  //Breakpoint
+  @media (max-width: 768px) {
+    .bracketsList {
+      grid-template-columns: 1fr;
+    }
+    .rowOptions {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+    }
+    .colEventImage {
+      order: 1;
+    }
+    .colDivisions,
+    .colTeamInfo {
+      order: 2;
+    }
+    .AlingContainer {
+      display: none;
+    }
+  }
+  
