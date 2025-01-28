@@ -3,4 +3,5 @@ import { BracketsStartComponent } from './comp/brackets/brackets-start/brackets-
 
 export const routes: Routes = [
     { path: '', component: BracketsStartComponent },
+    { path: '*', component: BracketsStartComponent },
 ];
