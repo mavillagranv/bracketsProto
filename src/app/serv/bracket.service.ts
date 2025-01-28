@@ -73,7 +73,7 @@ export class BracketService {
     eventForFemales: false,
     eventMixed: false,
   }
-  last$intrestedTeams: any[] = [{
+  last$intrestedTeams: TeamUnit[] = [{
     teamName: 'Mike team 1',
     teamId: '1234',
     teamUnitName: 'Varsity',
@@ -84,7 +84,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    },
   }
     , {
     teamName: 'Mike team 3',
@@ -97,7 +106,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    },
   }, {
     teamName: 'Mike team 4',
     teamId: '4567',
@@ -109,7 +127,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 5',
     teamId: '5678',
@@ -121,7 +148,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 6',
     teamId: '6789',
@@ -133,7 +169,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 7',
     teamId: '7890',
@@ -145,7 +190,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 8',
     teamId: '8901',
@@ -157,7 +211,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 9',
     teamId: '9012',
@@ -169,7 +232,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 10',
     teamId: '0123',
@@ -181,7 +253,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 11',
     teamId: '1234',
@@ -193,7 +274,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 12',
     teamId: '2345',
@@ -205,7 +295,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 13',
     teamId: '3456',
@@ -217,7 +316,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 14',
     teamId: '4567',
@@ -229,7 +337,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 15',
     teamId: '5678',
@@ -241,7 +358,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 16',
     teamId: '6789',
@@ -253,7 +379,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }]
   last$registeredTeams: any[] = [{
     teamName: 'Mike team 1',
@@ -266,7 +401,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }
     , {
     teamName: 'Mike team 3',
@@ -279,7 +423,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 4',
     teamId: '4567',
@@ -291,7 +444,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 5',
     teamId: '5678',
@@ -303,7 +465,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 6',
     teamId: '6789',
@@ -315,7 +486,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 7',
     teamId: '7890',
@@ -327,7 +507,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 8',
     teamId: '8901',
@@ -339,7 +528,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 9',
     teamId: '9012',
@@ -351,7 +549,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 10',
     teamId: '0123',
@@ -363,7 +570,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 11',
     teamId: '1234',
@@ -375,7 +591,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 12',
     teamId: '2345',
@@ -387,7 +612,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 13',
     teamId: '3456',
@@ -399,7 +633,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }, {
     teamName: 'Mike team 14',
     teamId: '4567',
@@ -411,7 +654,16 @@ export class BracketService {
     teamUnitManagersIds: [],
     teamUnitManagers: [],
     teamUnitFlavor: 'default',
-    teamUnitPlayers: []
+    teamUnitPlayers: [],
+    teamUnitCoach: {
+      userId: '123412341',
+      userFirstName: 'Edgar',
+      userLastName: 'Barajas',
+      userIsCoach: true,
+      userMail: 'edgar@edgar.com',
+      contactPhone: '234567',
+      contactEmail: 'edgar@edgar.com',
+    }
   }]
 
   constructor() { }

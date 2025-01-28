@@ -27,6 +27,16 @@ export interface EventOrganizer {
     contactEmail: string,
     contactPhone: string
 }
+export interface TeamCoach {
+    userId: string,
+    userFirstName: string,
+    userLastName: string,
+    userMail: string,
+    contactEmail: string,
+    contactPhone: string,
+    userIsCoach: boolean
+
+}
 export interface UserM {
     //For admins
     eventOrganizer?: boolean,
@@ -90,8 +100,4 @@ export interface Parent {
             userLastName: string
         }
     ]
-}
-export interface Coach {
-    userIsCoach: boolean
-
 }

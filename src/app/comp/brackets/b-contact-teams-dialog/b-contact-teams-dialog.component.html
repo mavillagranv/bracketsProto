@@ -1,8 +1,24 @@
-<h2 mat-dialog-title>Dialog with elements</h2>
-<mat-dialog-content>This dialog showcases the title, close, content and actions elements.
-    <pre>{{data|json}}</pre>
+<h2 mat-dialog-title>Team contact information</h2>
+<mat-dialog-content>
+  <p>Select the team that you will contact</p>
 
+  <p>interested Team list</p>
+  <select name="" id="">
+    <option *ngFor="let team of data" [value]="team.teamId">
+      {{ team.teamId }} - {{ team.teamName }} - {{ team.teamUnitName }}
+    </option>
+  </select>
+  <br />
+  <p>Coach</p>
+  <select name="" id="">
+    <pre>{{ data | json }}</pre>
+  </select>
+
+  <pre>{{ data | json }}</pre>
 </mat-dialog-content>
+
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
+  <button id="call">Call</button>
+  <button id="mail">Mail</button>
+  <button mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

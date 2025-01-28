@@ -1,4 +1,4 @@
-import { UserM } from "./userModels";
+import { TeamCoach, UserM } from "./userModels";
 
 export interface Team {
     //Developer
@@ -37,7 +37,7 @@ export interface TeamUnit {
     teamUnitManagersIds: string[],
     teamUnitManagers: UserM[],
     participantIds?: string[],
-    teamUnitCoach?: UserM,
+    teamUnitCoach?: TeamCoach,
     teamUnitFlavor: string,
     teamUnitPlayers: UserM[],
     divisionCode?: string,
