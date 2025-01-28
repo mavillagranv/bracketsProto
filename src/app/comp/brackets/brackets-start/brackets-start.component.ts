@@ -51,7 +51,7 @@ export class BracketsStartComponent {
   constructor(private bracketServ: BracketService) {
     this.bracketServ.loadTeamUnits()
   }
-  openDialog(data: TeamUnit) {
+  openDialog(data: TeamUnit[]) {
     this.dialog.open(BContactTeamsDialogComponent, {
       width: '80vw',
       height: '80vh',

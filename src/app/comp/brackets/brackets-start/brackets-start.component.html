@@ -33,13 +33,11 @@
                 </label>
                 <br />
                 <br />
-                @for(iTeamUnit of $intrestedTeams;track $index){
                 <div>
-                    <button mat-fab extended class="contactButton" (click)="openDialog(iTeamUnit)">
+                    <button mat-fab extended class="contactButton" (click)="openDialog($intrestedTeams)">
                         <mat-icon>message</mat-icon> Contact with the interested teams
                     </button>
                 </div>
-                }
             </div>
             <div class="colEventImage">
                 <img _ngcontent-ng-c3499084749=""
