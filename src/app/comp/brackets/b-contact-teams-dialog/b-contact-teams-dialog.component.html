@@ -1,24 +1,66 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
 <h2 mat-dialog-title>Team contact information</h2>
 <mat-dialog-content>
   <p>Select the team that you will contact</p>
 
-  <p>interested Team list</p>
-  <select name="" id="">
+  <p><strong>Interested Team List</strong></p>
+  <select name="teams" id="teams" (change)="onTeamSelect($event)">
+    <option disabled selected>--Select an option--</option>
     <option *ngFor="let team of data" [value]="team.teamId">
       {{ team.teamId }} - {{ team.teamName }} - {{ team.teamUnitName }}
     </option>
   </select>
-  <br />
-  <p>Coach</p>
-  <select name="" id="">
-    <pre>{{ data | json }}</pre>
-  </select>
 
-  <pre>{{ data | json }}</pre>
+  <br />
+  <br />
+  <p><strong>Payment Link</strong></p>
+
+  <select name="teams" id="teams" (change)="onTeamSelect($event)">+
+    @for (payLink of $user.userPaymentLinks;track $index){
+    <option [value]="payLink.link">{{payLink.alias}} @if(payLink.amount!=undefined){
+      {{payLink.amount|currency}}
+      }
+    </option>
+    }
+  </select>
+  <br>
+  <button mat-raised-button color="primary">Send payment link</button>
+  <p><strong>Information Coach</strong></p>
+  <!-- Condición para mostrar solo si hay un coach seleccionado -->
+  <div id="contact" *ngFor="let coach of filteredCoaches" (click)="onCoachSelect(coach)">
+    <p>
+      <strong>Name:</strong> {{ coach.userFirstName }} {{ coach.userLastName }}
+    </p>
+    <p><strong>Phone:</strong> {{ coach.contactPhone }}</p>
+    <p><strong>Email:</strong> {{ coach.contactEmail }}</p>
+    <button id="Registered" align="center">Registered team</button>
+  </div>
+
+  <br />
+  <br />
+
+  <div class="buttons-container" *ngFor="let coach of filteredCoaches">
+    <button id="call" (click)="makeCall(coach.contactPhone)">
+      <i class="fa fa-phone"></i> Call
+    </button>
+    <button id="mail" (click)="sendEmail(coach.contactEmail)">
+      <i class="fa fa-envelope"></i> Mail
+    </button>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button id="call">Call</button>
-  <button id="mail">Mail</button>
-  <button mat-button mat-dialog-close>Close</button>
+  <div class="buttons-container" *ngFor="let coach of filteredCoaches">
+    <button id="call" (click)="makeCall(coach.contactPhone)">
+      <i class="fa fa-phone"></i> Call
+    </button>
+  </div>
+  <div class="buttons-container" *ngFor="let coach of filteredCoaches">
+    <button id="mail" (click)="sendEmail(coach.contactEmail)">
+      <i class="fa fa-envelope"></i> Mail
+    </button>
+  </div>
+  <button id="close" mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

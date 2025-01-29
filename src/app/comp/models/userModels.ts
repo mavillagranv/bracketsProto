@@ -3,14 +3,14 @@ export interface TeamAdministrator {
     userMail: string,
     userFirstName: string,
     userLastName: string,
-    isTeamAdministrator: boolean
+    userIsTeamAdministrator: boolean
 }
 export interface DeveloperM {
     userId: string,
     userMail: string,
     userFirstName: string,
     userLastName: string,
-    isDeveloper: boolean
+    userIsDeveloper: boolean
 }
 export interface Administrator {
     userId: string
@@ -37,6 +37,11 @@ export interface TeamCoach {
     userIsCoach: boolean
 
 }
+export interface PaymentLink {
+    link: string,
+    alias: string,
+    amount?: number
+}
 export interface UserM {
     //For admins
     eventOrganizer?: boolean,
@@ -59,8 +64,10 @@ export interface UserM {
     coverPicture?: string,
     //Personal information 
     playerIsActive?: boolean,
-    userIsParent?: string,
+    userIsParent?: boolean,
     userIsCoach?: boolean,
+    userIsDeveloper?: boolean,
+    userIsTeamAdministrator?: boolean,
     userFirstName?: string,
     userLastName?: string,
     //userMiddleName?: string,
@@ -78,6 +85,8 @@ export interface UserM {
     playerSchool?: string,
     //Coach properties
     coachSchool?: string,
+    //Event organizer properties
+    userPaymentLinks?: PaymentLink[]
 }
 export interface Player {
     userFirstName?: string,
