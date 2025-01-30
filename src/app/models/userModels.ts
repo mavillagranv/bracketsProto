@@ -28,13 +28,14 @@ export interface EventOrganizer {
     contactPhone: string
 }
 export interface TeamCoach {
+    profilePicture: string
     userId: string,
     userFirstName: string,
     userLastName: string,
     userMail: string,
     contactEmail: string,
     contactPhone: string,
-    userIsCoach: boolean
+    userIsCoach: boolean,
 
 }
 export interface PaymentLink {

@@ -1,9 +1,127 @@
+$base-blue: #002A5C;
+$base-green: #7fc840;
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   background-color: #f0f4f8;
 }
+
+/* 
+╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
+┇                            root css                             ┇
+╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
+*/
+/* .header1 {
+  .header1 {
+    margin-bottom: 15px;
+
+    .mdc-icon-button {
+      background-color: white;
+    }
+
+    h3 {
+      margin: unset;
+      color: #002A5C;
+      text-align: center;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+} */
+.rootSBlue {
+  .mat-mdc-snackbar-surface {
+      background-color: $base-blue !important;
+  }
+
+  .mat-mdc-snack-bar-action {
+      color: $base-green !important;
+  }
+}
+
+.rootFlexW {
+  flex-wrap: wrap;
+}
+
+.rootFlexCol {
+  flex-direction: column;
+}
+
+.rootFlexCC {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rootFlexSbC {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rootFlexSaC {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.rootFlexSeC {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.rootPageHeader {
+  .bgB {
+      background-color: $base-blue;
+  }
+
+  .bgW {
+      background-color: white;
+  }
+
+  .imgCont {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      margin: 2px;
+      display: flex;
+
+      img {
+          margin: 2px;
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+      }
+  }
+
+  margin-bottom: 15px;
+
+  .mdc-icon-button {
+      background-color: white;
+  }
+
+  h3 {
+      margin: unset;
+      color: #002A5C;
+      text-align: center;
+      font-family: "nasalization", sans-serif;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+  }
+}
+
+/* 
+╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
+┇                            root css                             ┇
+╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
+*/

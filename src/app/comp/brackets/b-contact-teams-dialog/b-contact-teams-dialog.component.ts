@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { Team } from '../../models/teamModels';
 
 import {
   MAT_DIALOG_DATA,
@@ -11,7 +10,8 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { AuthService } from '../../../serv/auth.service';
-import { UserM } from '../../models/userModels';
+import { UserM } from '../../../models/userModels';
+import { Team } from '../../../models/teamsModels';
 @Component({
   selector: 'app-b-contact-teams-dialog',
   standalone: true,
@@ -26,23 +26,33 @@ import { UserM } from '../../models/userModels';
   styleUrl: './b-contact-teams-dialog.component.scss'
 })
 export class BContactTeamsDialogComponent {
-  data = inject(MAT_DIALOG_DATA);
-  
+  /* 
+  ╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
+  ┇                           Miguel's logic                        ┇
+  ╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
+  */
+
   compName = 'BContactTeamsDialogComponent'
+  data = inject(MAT_DIALOG_DATA);
+
   $user!: UserM;
-  $admin!:boolean;
-  $developer!:boolean;
+  $admin!: boolean;
+  $developer!: boolean;
   SUB$user = this.authServ.$user.subscribe(data => {
     this.$user = data;
-    this.$admin=this.authServ.$admin;
-    this.$developer=this.authServ.$developer;
+    this.$admin = this.authServ.$admin;
+    this.$developer = this.authServ.$developer;
 
   })
   constructor(private authServ: AuthService) {
     authServ.reloadActiveUser(this.compName)
   }
-
-  ///Edgar B
+  
+  /* 
+  ╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
+  ┇                          Edgars's logic                        ┇
+  ╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
+  */
 
   selectedTeamId: string = ''; // ID del equipo seleccionado
   filteredCoaches: any[] = []; // Lista filtrada de entrenadores

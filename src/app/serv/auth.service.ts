@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from "@angular/core";
-import { UserM } from "../comp/models/userModels";
+import { UserM } from "../models/userModels";
 
 @Injectable({
     providedIn: 'root'

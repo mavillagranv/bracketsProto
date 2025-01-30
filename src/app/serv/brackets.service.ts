@@ -1,14 +1,132 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { TeamUnit } from '../comp/models/teamModels';
-import { EventModel } from '../comp/models/eventModel';
+import { Injectable } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { EventModel } from '../models/eventsModel';
+import { TeamUnit } from '../models/teamsModels';
+import { TeamCoach, UserM } from '../models/userModels';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BracketService {
-  $registeredTeams = new EventEmitter<any[]>();
-  $intrestedTeams = new EventEmitter<any[]>();
+export class BracketsService {
+  servName = 'BracketsService';
+  auditTimeValue = 300;
+  dataLoad = {
+    $intrestedTeamUnits: true,
+    $registeredTeamUnits: true,
+    $event: true,
+    selectedEventDivision: '',
+    poolsSelectedCount: 0,
+    eventPublicId: ''
+  }
+  $intrestedTeamUnits = new EventEmitter<TeamUnit[]>();
+  last$intrestedTeamUnits!: TeamUnit[];
+  $registeredTeamUnits = new EventEmitter<TeamUnit[]>();
+  last$registeredTeamUnits!: TeamUnit[];
   $event = new EventEmitter<EventModel>();
+  //last$event!: EventModel;
+  constructor(
+    //private afs: AngularFirestore,
+    //private errServ: ErrorService,
+    //private rServ: ReadServiceService,
+    //private notServ: NotificationsService
+  ) {
+
+  }
+  reloadData() {
+    !this.dataLoad.$intrestedTeamUnits ? this.$intrestedTeamUnits.emit(this.last$intrestedTeamUnits) : null;
+    !this.dataLoad.$registeredTeamUnits ? this.$registeredTeamUnits.emit(this.last$registeredTeamUnits) : null;
+    !this.dataLoad.$event ? this.$event.emit(this.last$event) : null;
+  }
+
+  /* 
+  ╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
+  ┇                          Fake data                              ┇
+  ╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
+  */
+  fakeUsers: UserM[] = this.createFakeUsers();
+  loadEvent(publicId: string) {
+    this.$intrestedTeamUnits.emit(this.createRandomTeams(12))
+    this.$registeredTeamUnits.emit(this.createRandomTeams(10))
+    this.$event.emit(this.last$event);
+  }
+  createRandomTeams(count: number): any[] {
+    const teams = [];
+    for (let i = 0; i < count; i++) {
+      teams.push({
+        unitDivision: `Division ${i % 3}`,
+        ownerId: `owner${i}`,
+        priority: Math.floor(Math.random() * 10),
+        teamLogoUrl: `http://example.com/logo${i}.png`,
+        teamName: `Team ${i}`,
+        teamAbbreviation: `T${i}`,
+        timestamp: new Date(),
+        teamId: `team${i}`,
+        teamUnitId: `unit${i}`,
+        teamUnitName: `Unit ${i}`,
+        teamUnitManagersIds: [`manager${i}`],
+        teamUnitManagers: this.createFakeUsers().slice(0, 2),
+        participantIds: [`participant${i}`],
+        teamUnitCoach: this.placeholderTeamCoach,
+        teamUnitFlavor: 'default',
+        teamUnitPlayers: this.createFakeUsers().slice(0, 5),
+        divisionCode: `D${i % 3}`,
+      });
+    }
+    return teams;
+  }
+  placeholderTeamCoach: TeamCoach = {
+    profilePicture: 'someurl.com/image',
+    userId: 'placeholderId',
+    userFirstName: 'PlaceholderFirstName',
+    userLastName: 'PlaceholderLastName',
+    userMail: 'placeholder@example.com',
+    contactEmail: 'placeholder@example.com',
+    contactPhone: '1234567890',
+    userIsCoach: true,
+  };
+  createFakeUsers(): UserM[] {
+    let fakeUsers = [];
+    for (let i = 0; i < 10; i++) {
+      fakeUsers.push({
+        eventOrganizer: Math.random() > 0.5,
+        userCreated: new Date(),
+        betaTester: Math.random() > 0.5,
+        teamAdmin: Math.random() > 0.5,
+        developer: Math.random() > 0.5,
+        timestamp: new Date(),
+        firstUpdate: Math.random() > 0.5,
+        userIsAdmin: Math.random() > 0.5,
+        isTeamAdministrator: Math.random() > 0.5,
+        userDisplayName: `User ${i}`,
+        userId: `user${i}`,
+        userPhotoUrl: `http://example.com/user${i}.png`,
+        userMail: `user${i}@example.com`,
+        useGooglePhoto: Math.random() > 0.5,
+        profilePicture: `http://example.com/profile${i}.png`,
+        coverPicture: `http://example.com/cover${i}.png`,
+        playerIsActive: Math.random() > 0.5,
+        userIsParent: Math.random() > 0.5,
+        userIsCoach: Math.random() > 0.5,
+        userIsDeveloper: Math.random() > 0.5,
+        userIsTeamAdministrator: Math.random() > 0.5,
+        userFirstName: `FirstName${i}`,
+        userLastName: `LastName${i}`,
+        userUsername: `username${i}`,
+        playerCity: `City${i}`,
+        userInstagram: `instagram${i}`,
+        userX: `x${i}`,
+        userYoutube: `youtube${i}`,
+        playerDOB: new Date(2000, i % 12, i % 28),
+        playerClassOf: 2020 + i,
+        playerHeight: `${150 + i} cm`,
+        playerPosition: `Position${i}`,
+        playerSchool: `School${i}`,
+        coachSchool: `CoachSchool${i}`,
+        userPaymentLinks: []
+      });
+    }
+    return fakeUsers;
+  }
   last$event: EventModel = {
     //Contact
     contactMail: 'A@A.com',
@@ -86,6 +204,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -108,6 +227,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -129,6 +249,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -150,6 +271,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -171,6 +293,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -192,6 +315,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -213,6 +337,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -234,6 +359,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -255,6 +381,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -276,6 +403,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -297,6 +425,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -318,6 +447,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -339,6 +469,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -360,6 +491,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -381,6 +513,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -403,6 +536,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -425,6 +559,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -446,6 +581,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -467,6 +603,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -488,6 +625,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -509,6 +647,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -530,6 +669,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -551,6 +691,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -572,6 +713,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -593,6 +735,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -614,6 +757,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -635,6 +779,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -656,6 +801,7 @@ export class BracketService {
     teamUnitFlavor: 'default',
     teamUnitPlayers: [],
     teamUnitCoach: {
+      profilePicture: 'someurl.com/image',
       userId: '123412341',
       userFirstName: 'Edgar',
       userLastName: 'Barajas',
@@ -666,10 +812,4 @@ export class BracketService {
     }
   }]
 
-  constructor() { }
-  loadTeamUnits() {
-    this.$registeredTeams.emit(this.last$registeredTeams);
-    this.$intrestedTeams.emit(this.last$intrestedTeams);
-    this.$event.emit(this.last$event)
-  }
 }

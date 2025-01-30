@@ -1,4 +1,5 @@
-import { TeamUnit } from "./teamModels"
+import { TeamUnit } from "./teamsModels"
+
 export interface Venues {
     venueId?: string,
     venueName: string,
@@ -49,11 +50,11 @@ export interface EventModel {
     eventForFemales: boolean,
     eventMixed: boolean,
     //Organization
-    eventCategories?: EventCategory[]
+    eventCategories: EventCategory[]
     eventSchedule?: [],//Missing
     eventRegisteredTeams?: [],//Missing
-    //Depreciated
-    eventCourts?: number
+     //Depreciated
+     eventCourts?: number
 
 }
 export interface EventCategory {
