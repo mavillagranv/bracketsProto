@@ -17,4 +17,8 @@ export class HomeComponent {
   go() {
     this.router.navigate(['brackets/12345'])
   }
+  edgar(){
+    this.router.navigate(['bracketEditor/12345'])
+
+  }
 }

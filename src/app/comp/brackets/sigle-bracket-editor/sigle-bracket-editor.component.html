@@ -1,0 +1,37 @@
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>Unassigned</h2>
+
+    <div cdkDropList [cdkDropListData]="unassignedUnits" class="example-list" (cdkDropListDropped)="drop($event)">
+      @for (teamUnit of unassignedUnits; track $index) {
+      <div class="unitCard" cdkDrag>
+        <div class="logoCont">
+          <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
+        </div>
+        <div class="infoCont">
+          {{teamUnit.teamUnitName}}
+        </div>
+        <!-- <pre>{{teamUnit|json}}</pre> -->
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Done</h2>
+
+    <div cdkDropList [cdkDropListData]="bracketOrder" class="example-list" (cdkDropListDropped)="drop($event)">
+      @for (teamUnit of bracketOrder; track $index) {
+        <div class="unitCard" cdkDrag>
+          <div class="logoCont">
+            <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
+          </div>
+          <div class="infoCont">
+            {{teamUnit.teamUnitName}}
+          </div>
+          <!-- <pre>{{teamUnit|json}}</pre> -->
+        </div>
+      }
+    </div>
+  </div>
+</div>

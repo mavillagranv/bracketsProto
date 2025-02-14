@@ -1,127 +1,189 @@
+@use '@angular/material' as mat;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 $base-blue: #002A5C;
 $base-green: #7fc840;
-html,
-body {
-  height: 100%;
+$high-light-blue: #1b75bb;
+$base-gray: #1C1310;
+$background-gray: #F1F3F0;
+$layout-breakpoint-xsmall: 360px;
+$break-l: 1200px;
+$break-m: 768px;
+$break-sm: 430px;
+$break-xsm: 360px;
+
+html {
+    color-scheme: light;
+    background-color: $background-gray;
+    font-family: Roboto, sans-serif;
+   /*  @include mat.theme((color: mat.$azure-palette,
+            typography: Roboto,
+            density: 0)); */
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-color: #f0f4f8;
+:root {
+    //Material modificators
+
+
+    button {
+        --mat-sys-surface: white;
+        --mat-sys-primary: #002A5C;
+        --mat-icon-color: #002A5C;
+        margin: 5px;
+        font-family: "Poppins", serif !important;
+        font-weight: 400 !important;
+        font-style: normal !important;
+    }
+
+    @for $i from 0 through 24 {
+        .elevation-z#{$i} {
+            @include mat.elevation($i);
+        }
+    }
+
+    mat-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
+
+
 
 /* 
-╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
-┇                            root css                             ┇
-╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
+  ╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
+  ┇                          Root classes                           ┇
+  ╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
 */
-/* .header1 {
-  .header1 {
-    margin-bottom: 15px;
-
-    .mdc-icon-button {
-      background-color: white;
-    }
-
-    h3 {
-      margin: unset;
-      color: #002A5C;
-      text-align: center;
-      font-family: "Poppins", sans-serif;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-    }
-  }
-} */
 .rootSBlue {
-  .mat-mdc-snackbar-surface {
-      background-color: $base-blue !important;
-  }
+    .mat-mdc-snackbar-surface {
+        background-color: $base-blue !important;
+    }
 
-  .mat-mdc-snack-bar-action {
-      color: $base-green !important;
-  }
+    .mat-mdc-snack-bar-action {
+        color: $base-green !important;
+    }
 }
 
 .rootFlexW {
-  flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .rootFlexCol {
-  flex-direction: column;
+    flex-direction: column;
 }
 
 .rootFlexCC {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rootFlexEC {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rootFlexAC {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rootFlexCS {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.rootFlexBC {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .rootFlexSbC {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .rootFlexSaC {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.rootFlexSC {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.rootFlexSS {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.rootFlexRC {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.rootFlexLC {
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
 .rootFlexSeC {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .rootPageHeader {
-  .bgB {
-      background-color: $base-blue;
-  }
+    margin-bottom: 15px;
 
-  .bgW {
-      background-color: white;
-  }
+    .bgB {
+        background-color: $base-blue;
+    }
 
-  .imgCont {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      margin: 2px;
-      display: flex;
+    .bgW {
+        background-color: white;
+    }
 
-      img {
-          margin: 2px;
-          width: 45px;
-          height: 45px;
-          border-radius: 50%;
-      }
-  }
+    .imgCont {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        margin: 2px;
+        display: flex;
 
-  margin-bottom: 15px;
+        img {
+            margin: 2px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+    }
 
-  .mdc-icon-button {
-      background-color: white;
-  }
 
-  h3 {
-      margin: unset;
-      color: #002A5C;
-      text-align: center;
-      font-family: "nasalization", sans-serif;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-  }
+    .mdc-icon-button {
+        background-color: white;
+    }
+
+    h3 {
+        margin: unset;
+        color: #002A5C;
+        text-align: center;
+        font-family: "nasalization", sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
 }
-
-/* 
-╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
-┇                            root css                             ┇
-╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
-*/
