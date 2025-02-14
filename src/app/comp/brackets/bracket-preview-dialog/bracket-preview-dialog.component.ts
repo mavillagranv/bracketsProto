@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 //router
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamUnit } from '../../../models/teamsModels';
+import { BracketsService } from '../../../serv/brackets.service';
+import { AuthService } from '../../../serv/auth.service';
 
 @Component({
   selector: 'app-bracket-preview-dialog',
@@ -34,7 +36,7 @@ import { TeamUnit } from '../../../models/teamsModels';
   styleUrl: './bracket-preview-dialog.component.scss'
 })
 export class BracketPreviewDialogComponent {
-  corpName = 'BracketPreviewDialogComponent';
+  compName = 'BracketPreviewDialogComponent';
   /*$user!: UserM;
   $admin!:boolean;
   $developer:boolean;*/
@@ -48,6 +50,8 @@ export class BracketPreviewDialogComponent {
     private activatedRoute: ActivatedRoute,
     public dialogRef: MatDialogRef<BracketPreviewDialogComponent>,
     private router: Router,
+    private bracketServ: BracketsService,
+    private authServ: AuthService,
     @Inject(MAT_DIALOG_DATA)
     public data: {
       publicId: string;
@@ -55,78 +59,101 @@ export class BracketPreviewDialogComponent {
       description: string;
       divisions: string;
       registeredTeams: TeamUnit[];
+      pollsSelectedCount: number;
       event: any;
     }
   ) {
-    /*authServ.reloadActiveUser(this.corpName);*/
+    this.authServ.reloadActiveUser(this.compName);
+    this.bracketServ.reloadData();
+    this.bracketServ.dataLoad.eventPublicId = String(
+      this.activatedRoute.snapshot.paramMap.get('publicId')
+    );
     this.calculateGames();
   }
-
-  validateAndCalculateGames() {
-    if (
-      this.pollTentative < 1 ||
-      this.pollTentative > 99 ||
-      isNaN(this.pollTentative)
-    ) {
+  onPollTentativeChange() {
+    if (this.pollTentative < 1) {
       this.pollTentative = 1;
+    } else if (this.pollTentative > 20) {
+      this.pollTentative = 20;
+    }
+
+    this.calculateGames();
+  }
+  calculateGames() {
+    let teams = this.data.registeredTeams.length;
+    let pools = this.pollTentative;
+
+    if (pools > teams / 2) {
+      alert('Number of pools not allowed');
       return;
     }
-    this.calculateGames();
-  }
-
-  calculateGames() {
     if (this.data.title == 'Round Robin') {
-      this.minGamesPerTeam = this.data.registeredTeams.length - 1;
-      this.totalGames =
-        (this.data.registeredTeams.length *
-          (this.data.registeredTeams.length - 1)) /
-        2;
+      this.minGamesPerTeam = teams - 1;
+      this.totalGames = (teams * (teams - 1)) / 2;
     }
     if (this.data.title == 'Pool Games') {
-      this.minGamesPerTeam = this.data.registeredTeams.length - 1;
-      this.totalGames =
-        this.pollTentative *
-        ((this.data.registeredTeams.length *
-          (this.data.registeredTeams.length - 1)) /
-          2);
+      let baseSize = Math.floor(teams / pools);
+      let extraTeams = teams % pools;
+      let totalGames = 0;
+
+      for (let i = 0; i < pools; i++) {
+        let poolSize = baseSize + (i < extraTeams ? 1 : 0);
+        totalGames += (poolSize * (poolSize - 1)) / 2;
+      }
+
+      this.totalGames = totalGames;
+      this.minGamesPerTeam = baseSize - 1;
     }
     if (this.data.title == 'Single Elimination') {
       this.minGamesPerTeam = 1;
-      this.totalGames = this.data.registeredTeams.length - 1;
+      this.totalGames = teams - 1;
     }
     if (this.data.title == 'Pool + Single Elimination') {
-      this.minGamesPerTeam =
-        1 + (this.data.registeredTeams.length - 1) * this.pollTentative;
-      this.totalGames =
-        this.pollTentative *
-        ((this.data.registeredTeams.length *
-          (this.data.registeredTeams.length - 1)) /
-          2) +
-        (this.data.registeredTeams.length - this.pollTentative);
+      this.minGamesPerTeam = 1 + (teams - 1) * pools;
+      this.totalGames = pools * ((teams * (teams - 1)) / 2) + (teams - pools);
     }
     if (this.data.title == 'Pool + Double Elimination') {
-      this.minGamesPerTeam =
-        2 + (this.data.registeredTeams.length - 1) * this.pollTentative;
+      this.minGamesPerTeam = 2 + (teams - 1) * pools;
       this.totalGames =
-        this.pollTentative *
-        ((this.data.registeredTeams.length *
-          (this.data.registeredTeams.length - 1)) /
-          2) +
-        (2 * (this.data.registeredTeams.length - this.pollTentative) - 1);
+        pools * ((teams * (teams - 1)) / 2) + (2 * (teams - pools) - 1);
     }
   }
 
   openCreateBracket() { }
+
   openPoolEdit() {
-    console.log('Datos antes de enviar:', this.data);
+    if (
+      this.pollTentative === 0 ||
+      this.pollTentative > this.data.registeredTeams.length / 2
+    ) {
+      alert('Number of pools not allowed');
+      return;
+    }
+    //load data.
+    this.bracketServ.dataLoad.poolsSelectedCount = this.pollTentative;
+    this.bracketServ.dataLoad.eventPublicId = this.data.title;
+
+    console.log('Datos antes de enviar:', this.bracketServ.dataLoad);
+    console.log('Array', this.data.registeredTeams);
+
+    const registeredTeams = this.data.registeredTeams;
+    const publicId = this.data.publicId;
 
     this.dialogRef.close();
-    this.router.navigate([`poolEditor/${this.data.publicId}`]);
-    /* 
-        this.router.navigate(['../second-compon'], {
-          state: { eventData: JSON.parse(JSON.stringify(this.data)) },
-        }); */
+
+    sessionStorage.setItem(
+      'registeredTeams',
+      JSON.stringify({
+        registeredTeams: registeredTeams,
+        pollTentative: this.pollTentative,
+      })
+    );
+
+    this.router.navigate([`poolEditor/${publicId}`], {
+      state: { registeredTeams },
+    });
   }
+
   closeDialog(): void {
     this.dialogRef.close();
   }

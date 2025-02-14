@@ -1,45 +1,382 @@
-select {
-    width: 100%;
-    height: 30px;
+$base-blue: #002A5C;
+
+mat-icon {
+  --mat-sys-surface: $base-blue
+  --mat-sys-primary: white;
+  --mat-icon-color: white;
+}
+
+.container {
+  padding: 1rem;
+  min-width: 886px;
+  background-color: transparent;
+}
+
+h2,
+h3 {
+  color: #002a5c;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  font-family: nasalization, sans-serif !important;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+/* 📌 Pool Section */
+.poolTables {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  min-width: 450px;
+  min-height: 500px;
+}
+
+.poolContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  min-width: 450px;
+  min-height: 500px;
+  margin-bottom: 400px;
+  padding-bottom: 10px;
+}
+
+/* 📌 Storage Section */
+.storageDiv {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1100px;
+  /* 🔹 Controla el ancho máximo */
+  z-index: 2000;
+}
+
+.storageContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,
+      minmax(220px, 1fr));
+  /* 🔹 Adaptable */
+  gap: 10px;
+  padding: 12px;
+  border: 1.5px solid #002a5c;
+  border-radius: 8px;
+  background-color: rgba(154, 199, 245, 0.95);
+  transition: box-shadow 0.2s;
+  box-shadow: inset 0px 1px 7px rgba(0, 0, 0, 0.3);
+  max-height: 200px;
+  width: 90%;
+  max-width: 1050px;
+  overflow-y: auto;
+}
+
+.storageTitle {
+  grid-column: span 4;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #002a5c;
+  margin-bottom: 5px;
+}
+
+.storageContainer .teamCard {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 📌 Pool Cards */
+.poolCard {
+  width: auto;
+  min-width: 250px;
+  min-height: 3px;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  border: 4px solid #002a5c;
+  box-shadow: 0px 2px 4px rgba(0, 49, 108, 0.5);
+  user-select: none;
+  margin: 4px;
+}
+
+.poolHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1px 2px;
+}
+
+.poolTitle {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #002a5c;
+}
+
+/* 📌 Team Cards */
+.teamCard {
+  width: 100%;
+  max-width: 300px;
+  height: 100px;
+  margin: 3px 0;
+  padding: 1.5px 3px;
+  display: flex;
+  align-items: center;
+  border: 0.25px solid #002a5c;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  transition: box-shadow 0.2s;
+}
+
+.teamCard:hover {
+  transform: scale(1.01);
+  box-shadow: 0px 0.25px 0.75px rgba(0, 42, 92, 0.2);
+}
+
+.teamLogo {
+  img {
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    margin: 3px;
+    border-radius: 50%;
+    object-fit: cover;
   }
-  #call,
-  #mail {
-    width: 100%;
-    height: 10%;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 50px;
-    font-size: 20px;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: $base-blue;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.team-logo img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.teamTitle,
+.teamSubtitle {
+  font-size: 12px;
+  margin: 0;
+}
+
+.teamTitle {
+  font-weight: bold;
+}
+
+.teamSubtitle {
+  color: #6c757d;
+}
+
+/* 📌 Coach & Player Info */
+.coachPlayersInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.playersCount {
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+mat-icon {
+  font-size: 30px;
+  margin: 0.5px 0;
+}
+
+.coachName {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+}
+
+/* 📌 Buttons */
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.leftButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.createbutton {
+  background-color: #002a5c;
+  color: white;
+  font-size: 14px;
+  width: 220px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.createbutton:hover {
+  background-color: #001a2a;
+}
+
+.primaryButton,
+.secondaryButton {
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.primaryButton {
+  background-color: #002a5c;
+  color: white;
+  border: none;
+}
+
+.primaryButton:hover {
+  background-color: #001a2a;
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: #002a5c;
+  border: 1.5px solid #002a5c;
+}
+
+.secondaryButton:hover {
+  background-color: #002a5c;
+  color: white;
+}
+
+/* 📌 Animations */
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .teamCard {
+  transition: transform 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cdk-drag-placeholder,
+.placeholder {
+  opacity: 0.5;
+  background: rgba(0, 42, 92, 0.1);
+  border: 2px dashed #002a5c;
+  min-height: 80px;
+  width: 300px;
+  transition: min-height 250ms ease-in-out;
+}
+
+/* 📌 Sticky Note Effect */
+.hoverNote {
+  position: fixed;
+  background: #fff8e1;
+  border: 2px dashed black;
+  border-radius: 6px;
+  padding: 14px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+  max-width: 400px;
+  z-index: 1000;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  opacity: 0.95;
+  pointer-events: none;
+  transform: scale(1);
+  margin-top: 10px;
+}
+
+.hoverNote::-webkit-scrollbar {
+  width: 6px;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+  .poolContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-width: 100%;
   }
-  #call{
-    background-color: white;
-    color: black;
+
+  .poolCard {
+    width: 90%;
+    min-width: auto;
+    max-width: 350px;
   }
-  #mail{
-    background-color: black;
-    color: white;
+
+  .poolContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-width: 100%;
   }
-  #call:hover{
-    background-color: rgba(0, 0, 0, 0.39);
-    color: white;
-    transition: 1000ms;
+
+  .poolCard {
+    width: 95%;
+    min-width: auto;
+    max-width: 400px;
   }
-  #mail:hover{
-    background-color: rgba(255, 255, 255, 0.39);
-    color: black;
-    transition: 1000ms;
+
+  .storageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    max-width: 450px;
+    overflow-y: auto;
+    max-height: 250px;
   }
-  #contact{
-    background-color: rgba(151, 151, 151, 0.363);
-    font-size: 12x;
-    border-radius: 15px;
-    padding: 15px;
+
+  .storageContainer .teamCard {
+    width: 95%;
+    max-width: 400px;
   }
-  #Registered{
-    width: 25%;
-    height: 10%;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 50px;
-    font-size: 10px;
+}
+
+@media (max-width: 900px) {
+  .storageContainer {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+@media (max-width: 700px) {
+  .storageContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .storageContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .teamCard {
+    width: 90%;
+  }
+}

@@ -1,7 +1,124 @@
-<p style="color:red">
-    Bracket serv no será público en la versión final,
-    no se te olvide crear las variables que necesites en el componente.
-    También valida el selector de pools antes de que pases a esta página
+<!-- 
+    <p style="color:red">
+  Bracket serv no será público en la versión final, no se te olvide crear las
+  variables que necesites en el componente. También valida el selector de pools
+  antes de que pases a esta página
 </p>
+    Bracket serv no será público en la versión final no se te olvide crear las variables que necesites en el componente
 <pre>{{bracketServ.dataLoad|json}}</pre>
-<!-- Bracket serv no será público en la versión final no se te olvide crear las variables que necesites en el componente -->
+ -->
+<!--
+  File name: Bracket preview dialog
+  Creation Date: 01/28/2025
+  Last Modified: 13-02-2025
+  Created by: Samuel
+  Modified by: Samuel
+-->
+<div class="container">
+  <h2>Pool editor</h2>
+  <h3>Event: {{ eventData?.title }}</h3>
+  <h3>Division: {{ selectedEventDivision }}</h3>
+
+  <div class="buttonContainer">
+    <button class="createbutton" (click)="createPool()">
+      <mat-icon>add_circle</mat-icon>Create pools
+    </button>
+    <button class="secondaryButton" (click)="dropsPools()">Drop pools</button>
+    <div class="leftButtons">
+      <button class="primaryButton" (click)="savePools()">Save pools</button>
+      <button class="secondaryButton" matTooltip="if you have a saved pool, you cant reset" (click)="resetPools()">
+        Reset Pools
+      </button>
+      <button class="primaryButton" (click)="publishPools()">
+        Publish pools
+      </button>
+    </div>
+  </div>
+
+  <div class="poolTables" *ngIf="poolsMatrix.length > 1" cdkDropListGroup>
+    <div class="poolContainer">
+      <div class="poolCard" *ngFor="
+            let pool of poolsMatrix.slice(0, poolsMatrix.length - 1);
+            let i = index
+          " cdkDropList [cdkDropListData]="pool" [cdkDropListDisabled]="lockedPools[i] || false"
+        (cdkDropListDropped)="drop($event, i)" [ngClass]="{ lockedPool: lockedPools[i] }">
+        <div class="poolHeader">
+          <button mat-fab aria-label="Delete Pool" [disabled]="lockedPools[i] || false" (click)="deletePool(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <h3 class="poolTitle">Pool {{ i + 1 }}</h3>
+          <mat-slide-toggle [disabled]="pool.length <= 1" [checked]="lockedPools[i] || false"
+            (change)="togglePoolLock(i)" matTooltip="Click to save the pool and disable editing"
+            matTooltipPosition="above">
+          </mat-slide-toggle>
+        </div>
+        <mat-card class="teamCard" *ngFor="let team of pool" [style.border]="getColorFromTeamId(team.teamId)" cdkDrag
+          (mouseenter)="openNote(team)" (mouseleave)="hideTeamInfo()">
+          <mat-card-header>
+            <div mat-card-avatar class="teamLogo">
+              <img [src]="team.teamLogoUrl|teamLogo|async" alt="Team Logo" />
+            </div>
+            <mat-card-title class="teamTitle">{{
+              team.teamName
+              }}</mat-card-title>
+            <mat-card-subtitle class="teamSubtitle">
+              Division: {{ team.teamId }}
+            </mat-card-subtitle>
+            <mat-card-content class="coachPlayersInfo">
+              <label class="playersCount">
+                Players: {{ team.teamUnitPlayers.length }}
+              </label>
+              <mat-icon [style.color]="getColorFromCoach(team.teamUnitCoach?.userId)">person</mat-icon>
+              <span class="coachName">{{
+                team.teamUnitCoach?.userId || 'Unknown Coach'
+                }}</span>
+            </mat-card-content>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+    <div class="storageDiv">
+      <div class="storageContainer" cdkDropList [cdkDropListData]="poolsMatrix[poolsMatrix.length - 1]"
+        (cdkDropListDropped)="drop($event, poolsMatrix.length - 1)">
+        <div class="storageTitle">
+          <h2>Unassigned teams</h2>
+        </div>
+        <mat-card class="teamCard" *ngFor="let team of poolsMatrix[poolsMatrix.length - 1]"
+          [style.border]="getColorFromTeamId(team.teamId)" cdkDrag (mouseenter)="openNote(team)"
+          (mouseleave)="hideTeamInfo()">
+          <mat-card-header>
+            <div mat-card-avatar class="teamLogo">
+              <img [src]="team.teamLogoUrl|teamLogo|async" alt="Team Logo" />
+            </div>
+            <mat-card-title class="teamTitle">{{
+              team.teamName
+              }}</mat-card-title>
+            <mat-card-subtitle class="teamSubtitle">Division: {{ team.teamId }}</mat-card-subtitle>
+            <mat-card-content class="coachPlayersInfo">
+              <label class="playersCount">Players: {{ team.teamUnitPlayers.length }}</label>
+              <mat-icon [style.color]="getColorFromCoach(team.teamUnitCoach?.userId)">person</mat-icon>
+              <span class="coachName">{{
+                team.teamUnitCoach?.userId || 'Unknown Coach'
+                }}</span>
+            </mat-card-content>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <mat-card class="hoverNote" *ngIf="hoveredTeam" [ngStyle]="{ top: hoverPosition.y + 'px', right: '20px' }">
+    <mat-card-title>Note</mat-card-title>
+    <mat-card-subtitle>
+      Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+      roots in a piece of classical Latin literature from 45 BC, making it over
+      2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+      College in Virginia, looked up one of the more obscure Latin words,
+      consectetur, from a Lorem Ipsum passage, and going through the cites of
+      the word in classical literature, discovered the undoubtable source. Lorem
+      Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum
+    </mat-card-subtitle>
+  </mat-card>
+  <ng-template #placeholder>
+    <div class="cdk-drag-placeholder"></div>
+  </ng-template>
+</div>

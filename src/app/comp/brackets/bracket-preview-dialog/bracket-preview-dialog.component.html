@@ -1,73 +1,124 @@
 <!--
-  File name: Bracket preview dialog (Main view)
+  File name: Bracket preview dialog
   Creation Date: 01/28/2025
-  Last Modified: 01-29-2025
+  Last Modified: 07-02-2025
   Created by: Samuel
   Modified by: Samuel
 -->
 <div class="container">
     <div class="header">
-        <div class="rowHeader">
-            <div class="colRigth">
-                <h2>
-                    {{ data.title }}
-                </h2>
-                <h3>
-                    Event name:
-                    {{ data.event.eventName }}
-                </h3>
-            </div>
-            <div class="colLeft">
-                <img class="eventImagen" [src]="data.event.eventLogo" height="47px" alt="Image Event" />
-            </div>
+      <div class="rowHeader">
+        <div class="colRigth">
+          <h2>
+            {{ data.title }}
+          </h2>
+          <h3>
+            Event name:
+            {{ data.event.eventName }}
+          </h3>
         </div>
+        <div class="colLeft">
+          <img
+            class="eventImagen"
+            [src]="data.event.eventLogo"
+            height="47px"
+            alt="Image Event"
+          />
+        </div>
+      </div>
     </div>
     <div class="previewBracket">
-        <div class="bracketColumns">
-            <div class="bracketHeader">Minimum Games Per Team</div>
-            <div class="bracketNumber">{{ minGamesPerTeam }}</div>
-        </div>
-        <div class="bracketColumns">
-            <div class="bracketHeader">Total Games</div>
-            <div class="bracketNumber">{{ totalGames }}</div>
-        </div>
-        <div class="bracketColumns">
-            <div class="bracketHeader">Registred teams</div>
-            <div class="bracketNumber">{{ data.registeredTeams.length }}</div>
-        </div>
+      <div class="bracketColumns">
+        <div class="bracketHeader">Minimum Games Per Team</div>
+        <div class="bracketNumber">{{ minGamesPerTeam }}</div>
+      </div>
+      <div class="bracketColumns">
+        <div class="bracketHeader">Total Games</div>
+        <div class="bracketNumber">{{ totalGames }}</div>
+      </div>
+      <div class="bracketColumns">
+        <div class="bracketHeader">Registred teams</div>
+        <div class="bracketNumber">{{ data.registeredTeams.length }}</div>
+      </div>
     </div>
     <br />
-    <div class="pollContainer" *ngIf="
-        data?.title !== 'Round Robin' && data?.title !== 'Single Elimination'
-      ">
-        <label for="pollTentative" class="pollLabel">Tentative poll number:</label>
-        <mat-form-field appearance="outline" class="pollInput">
-            <input matInput id="pollTentative" type="number" [(ngModel)]="pollTentative"
-                (input)="validateAndCalculateGames()" min="1" max="99" placeholder="1-99 pools" />
-        </mat-form-field>
+    <div
+      class="pollContainer"
+      *ngIf="
+        data?.title !== 'Round Robin' &&
+        data?.title !== 'Single Elimination' &&
+        data?.title !== 'Empty Bracket'
+      "
+    >
+      <label for="pollTentative" class="pollLabel">Tentative pool number:</label>
+  
+      <mat-form-field appearance="outline" class="pollInput">
+        <input
+          matInput
+          id="pollTentative"
+          type="number"
+          [(ngModel)]="pollTentative"
+          (input)="onPollTentativeChange()"
+          min="1"
+          [max]="data.registeredTeams.length / 2 || 1"
+          placeholder="Enter number of pools"
+        />
+      </mat-form-field>
+    </div>
+    <div
+      class="pollContainer"
+      *ngIf="
+        data?.title !== 'Round Robin' &&
+        data?.title !== 'Single Elimination' &&
+        data?.title !== 'Empty Bracket'
+      "
+    >
+      <p class="details">
+        Minimum number of teams per pool:
+        {{ data.registeredTeams.length / pollTentative | number : '1.0-0' }}
+      </p>
     </div>
     <div class="details">
-        <h2>Description:</h2>
-        <label class="descriptionLabel"> {{ data.description }}</label>
-        <br />
-        <br />
-        <label class="divisionSelectedLabel">Division selected: {{ data.divisions }}</label>
-        <br />
+      <h2>Description:</h2>
+      <label class="descriptionLabel"> {{ data.description }}</label>
+      <br />
+      <br />
+      <label class="divisionSelectedLabel"
+        >Division selected: {{ data.divisions }}</label
+      >
+      <br />
     </div>
     <div class="buttonContainers">
-        <button class="buttonCancel" mat-fab extended (click)="closeDialog()">
-            Cancel
-        </button>
-        <button class="buttonCreate" mat-fab extended (click)="openPoolEdit()" *ngIf="
-          data?.title !== 'Round Robin' && data?.title !== 'Single Elimination'
-        ">
-            Design Polls
-        </button>
-
-        <button class="buttonCreate" mat-fab extended (click)="openCreateBracket()" *ngIf="
-          data?.title === 'Round Robin' || data?.title === 'Single Elimination'
-        ">
-            Create Bracket
-        </button>
+      <button class="buttonCancel" mat-fab extended (click)="closeDialog()">
+        Cancel
+      </button>
+      <button
+        class="buttonCreate"
+        mat-fab
+        extended
+        (click)="openPoolEdit()"
+        *ngIf="
+          !['Round Robin', 'Single Elimination', 'Empty Bracket'].includes(
+            data?.title ?? ''
+          )
+        "
+      >
+        Design Pools
+      </button>
+  
+      <button
+        class="buttonCreate"
+        mat-fab
+        extended
+        (click)="openCreateBracket()"
+        *ngIf="
+          ['Round Robin', 'Single Elimination', 'Empty Bracket'].includes(
+            data?.title ?? ''
+          )
+        "
+      >
+        Create Bracket
+      </button>
     </div>
-</div>
+  </div>
+  
