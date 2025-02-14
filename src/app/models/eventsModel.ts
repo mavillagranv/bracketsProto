@@ -8,6 +8,7 @@ export interface Venues {
     venueCity: string,
     venueState: string,
     venueStateAbb: string,
+    venuePhoto: string
 }
 export interface VenueCourts {
     courtId: string,
@@ -28,7 +29,7 @@ export interface EventModel {
     contactFullName: string,
     //General
     active: boolean,
-    eventLogo?:string,
+    eventLogo?: string,
     //organizationLogo?: string,
     eventIsOpen: boolean,
     userId: string,
@@ -53,8 +54,8 @@ export interface EventModel {
     eventCategories: EventCategory[]
     eventSchedule?: [],//Missing
     eventRegisteredTeams?: [],//Missing
-     //Depreciated
-     eventCourts?: number
+    //Depreciated
+    eventCourts?: number
 
 }
 export interface EventCategory {

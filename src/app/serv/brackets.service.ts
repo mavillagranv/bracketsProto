@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { EventModel } from '../models/eventsModel';
 import { TeamUnit } from '../models/teamsModels';
 import { TeamCoach, UserM } from '../models/userModels';
+import { VenuesService } from './venues.service';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,7 @@ export class BracketsService {
   ┇                          Fake data                              ┇
   ╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
   */
+  private vServ = inject(VenuesService);
   fakeUsers: UserM[] = this.createFakeUsers();
   loadEvent(publicId: string) {
     this.$intrestedTeamUnits.emit(this.createRandomTeams(12))
@@ -150,15 +152,7 @@ export class BracketsService {
       }
     ],
     eventVenues: [
-      {
-        venueId: 'loala',
-        venueName: 'Las canchas de a lado',
-        venueAddress: 'Aquí',
-        ZIPCode: '1234',
-        venueCity: 'CDMX',
-        venueState: 'Ciudad de México',
-        venueStateAbb: 'CDMX',
-      }
+      this.vServ.createVenue(1)
     ],
     eventDateStart: new Date(),
     eventDateEnd: new Date(),

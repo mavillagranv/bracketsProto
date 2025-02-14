@@ -347,6 +347,7 @@ export class BPoolEditorComponent {
               venueCity: 'IdVenue',
               venueState: 'IdVenue',
               venueStateAbb: 'IdVenue',
+              venuePhoto: 'IdVenue',
             },
 
             eventName: 'Generated Event',
@@ -432,6 +433,7 @@ export class BPoolEditorComponent {
             venueCity: 'IdVenue',
             venueState: 'IdVenue',
             venueStateAbb: 'IdVenue',
+            venuePhoto: 'IdVenue',
           },
 
           eventName: 'Generated Event',

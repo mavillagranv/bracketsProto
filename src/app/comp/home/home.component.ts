@@ -14,10 +14,13 @@ export class HomeComponent {
     private route: ActivatedRoute) {
 
   }
-  go() {
+  samuelS() {
     this.router.navigate(['brackets/12345'])
   }
-  edgar(){
+  samuelG() {
+    this.router.navigate(['venues'])
+  }
+  edgarB() {
     this.router.navigate(['bracketEditor/12345'])
 
   }
