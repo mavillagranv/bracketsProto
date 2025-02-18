@@ -4,14 +4,16 @@
 
     <div cdkDropList [cdkDropListData]="unassignedUnits" class="example-list" (cdkDropListDropped)="drop($event)">
       @for (teamUnit of unassignedUnits; track $index) {
-      <div class="unitCard" cdkDrag>
-        <div class="logoCont">
+      <!-- <pre>{{teamUnit|json}}</pre> -->
+      <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{'background-image':returnImage(teamUnit.teamUnitId)}" cdkDrag>
+        <div class="logoCont rootFlexCC">
           <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
         </div>
         <div class="infoCont">
-          {{teamUnit.teamUnitName}}
+          <h3 class="teamName">{{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )</h3>
+          <h2 class="teamName teamUnitName rootFlexSaC">{{ teamUnit.teamUnitName
+            }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{teamUnit.participantIds?.length}}</span></h2>
         </div>
-        <!-- <pre>{{teamUnit|json}}</pre> -->
       </div>
       }
     </div>
@@ -22,15 +24,17 @@
 
     <div cdkDropList [cdkDropListData]="bracketOrder" class="example-list" (cdkDropListDropped)="drop($event)">
       @for (teamUnit of bracketOrder; track $index) {
-        <div class="unitCard" cdkDrag>
-          <div class="logoCont">
-            <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
-          </div>
-          <div class="infoCont">
-            {{teamUnit.teamUnitName}}
-          </div>
-          <!-- <pre>{{teamUnit|json}}</pre> -->
+       <!-- <pre>{{teamUnit|json}}</pre> -->
+       <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{'background-image':returnImage(teamUnit.teamUnitId)}" cdkDrag>
+        <div class="logoCont rootFlexCC">
+          <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
         </div>
+        <div class="infoCont">
+          <h3 class="teamName">{{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )</h3>
+          <h2 class="teamName teamUnitName rootFlexSaC">{{ teamUnit.teamUnitName
+            }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{teamUnit.participantIds?.length}}</span></h2>
+        </div>
+      </div>
       }
     </div>
   </div>

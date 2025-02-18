@@ -8,7 +8,7 @@ export interface Venues {
     venueCity: string,
     venueState: string,
     venueStateAbb: string,
-    venuePhoto: string
+    venuePhoto?: string
 }
 export interface VenueCourts {
     courtId: string,

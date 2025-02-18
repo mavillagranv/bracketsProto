@@ -12,6 +12,7 @@ import { BracketsService } from '../../../serv/brackets.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TeamLogoPipe } from '../../../team-logo.pipe';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-sigle-bracket-editor',
   standalone: true,
@@ -20,6 +21,7 @@ import { TeamLogoPipe } from '../../../team-logo.pipe';
     CdkDropListGroup,
     CdkDropList,
     TeamLogoPipe,
+    MatIconModule,
     CdkDrag],
   templateUrl: './sigle-bracket-editor.component.html',
   styleUrl: './sigle-bracket-editor.component.scss'
@@ -34,10 +36,12 @@ export class SigleBracketEditorComponent implements OnInit {
   //╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
   private bracketServ = inject(BracketsService);
   private route = inject(ActivatedRoute);
-  //┇                       General variables & s                      ┇
+  //╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
+  //┇                       General variables & s                     ┇
   //╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
   $registeredTeamUnits: TeamUnit[] = [];
   SUB$registeredTeamUnits = this.bracketServ.$registeredTeamUnits.subscribe(data => {
+    this.$registeredTeamUnits = data;
     this.unassignedUnits = data;
 
   });
@@ -74,5 +78,31 @@ export class SigleBracketEditorComponent implements OnInit {
   //╒	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ╤ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╕
   //┇                        Edgars's logic                           ┇
   //╘	┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅	╛
+  returnImage(teamUnitId: string): string {
+    let index = this.$registeredTeamUnits.findIndex((x: TeamUnit) => x.teamUnitId == teamUnitId)
+    let toReturn = 0
+    let finish = false;
+    let minus = 0;
 
+    while (finish) {
+
+      switch (index - minus) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5: {
+          finish = true;
+          toReturn = index - minus;;
+          break;
+        }
+        default: {
+          minus -= 6;
+          break;
+        }
+      }
+    }
+    return `url("/assets/backgrounds/galaxy${toReturn}.jpeg")`
+  }
 }

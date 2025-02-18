@@ -1,9 +1,16 @@
+$base-blue: #002A5C;
+$base-green: #7fc840;
+$high-light-blue: #1b75bb;
+$base-gray: #1C1310;
+$background-gray: #F1F3F0;
+
 .example-container {
-    width: 400px;
-    max-width: 100%;
+    width: 300px;
+    height: 120px;
     margin: 0 25px 25px 0;
     display: inline-block;
     vertical-align: top;
+    border-radius: 10px;
 }
 
 .example-list {
@@ -17,27 +24,71 @@
 
 .unitCard {
     .logoCont {
+        margin: 5px;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        min-height: 80px;
+        background-color: $base-blue;
+
         img {
-            width: 50px;
-            height: 50px;
+            margin: 3px;
+            width: calc(100% - 3px);
+            height: calc(100% - 3px);
             object-fit: cover;
             border-radius: 50%;
         }
     }
 
+    .infoCont {
+        padding: 5px;
+        border-radius: 5px;
+        background: rgb(255, 255, 255);
+        background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.3996192226890757) 100%);
+        .teamName {
+            margin: 0;
+            color: #333;
+            color: #002A5C;
+            text-align: center;
+            font-family: "nasalization", sans-serif;
+            font-size: 17px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .teamUnitName {
+            font-size: 14px;
+        }
+    }
+
     border-radius: 15px;
-    padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     box-sizing: border-box;
-    cursor: move;
-    background: white;
-    font-size: 14px;
+    cursor:grab;
+
+    /* Aplica el desenfoque */
+    ;
+    background-size: cover; // Ajusta la imagen al contenedor
+    background-position: center; // Centra la imagen
+    background-repeat: no-repeat; // Evita que la imagen se repita
+    height: 100px;
+    width: calc(100% - 10px);
+    margin: 5px;
 }
+
+
+
+
+.teamId {
+    bottom: 0;
+    right: 0;
+    font-size: 15px;
+    color: #666;
+    margin-right: 5px;
+    margin-left: 130px;
+}
+
 
 .cdk-drag-preview {
     box-sizing: border-box;
