@@ -47,6 +47,7 @@ export class BracketsService {
   private vServ = inject(VenuesService);
   fakeUsers: UserM[] = this.createFakeUsers();
   loadEvent(publicId: string) {
+    console.log(publicId)
     this.$intrestedTeamUnits.emit(this.createRandomTeams(12))
     this.$registeredTeamUnits.emit(this.createRandomTeams(10))
     this.$event.emit(this.last$event);

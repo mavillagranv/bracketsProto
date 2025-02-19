@@ -5,14 +5,18 @@
     <div cdkDropList [cdkDropListData]="unassignedUnits" class="example-list" (cdkDropListDropped)="drop($event)">
       @for (teamUnit of unassignedUnits; track $index) {
       <!-- <pre>{{teamUnit|json}}</pre> -->
-      <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{'background-image':returnImage(teamUnit.teamUnitId)}" cdkDrag>
-        <div class="logoCont rootFlexCC">
-          <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
-        </div>
-        <div class="infoCont">
-          <h3 class="teamName">{{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )</h3>
-          <h2 class="teamName teamUnitName rootFlexSaC">{{ teamUnit.teamUnitName
-            }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{teamUnit.participantIds?.length}}</span></h2>
+      <div class="unitCard elevation-z5  rootFlexCC" [ngStyle]="{'background-image':returnImage(teamUnit.teamUnitId)}"
+        cdkDrag>
+        <div class="whiteB rootFlexSaC">
+
+          <div class="logoCont rootFlexCC">
+            <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
+          </div>
+          <div class="infoCont">
+            <h3 class="teamName">{{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )</h3>
+            <h2 class="teamName teamUnitName rootFlexSaC">{{ teamUnit.teamUnitName
+              }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{teamUnit.participantIds?.length}}</span></h2>
+          </div>
         </div>
       </div>
       }
@@ -20,19 +24,28 @@
   </div>
 
   <div class="example-container">
-    <h2>Done</h2>
-
+    <h2>Brackets</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>Máximum bracket size {{bracketSize}}</mat-label>
+      <select matNativeControl required (change)="changeBrackets($event)">
+        <option value="2">2 Teams</option>
+        <option value="3">3 Teams</option>
+      </select>
+    </mat-form-field>
     <div cdkDropList [cdkDropListData]="bracketOrder" class="example-list" (cdkDropListDropped)="drop($event)">
       @for (teamUnit of bracketOrder; track $index) {
-       <!-- <pre>{{teamUnit|json}}</pre> -->
-       <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{'background-image':returnImage(teamUnit.teamUnitId)}" cdkDrag>
-        <div class="logoCont rootFlexCC">
-          <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
-        </div>
-        <div class="infoCont">
-          <h3 class="teamName">{{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )</h3>
-          <h2 class="teamName teamUnitName rootFlexSaC">{{ teamUnit.teamUnitName
-            }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{teamUnit.participantIds?.length}}</span></h2>
+      <!-- <pre>{{teamUnit|json}}</pre> -->
+      <div class="unitCard elevation-z5  rootFlexCC" [ngStyle]="{'background-image':returnImage(teamUnit.teamUnitId)}"
+        cdkDrag>
+        <div class="whiteB rootFlexSaC">
+          <div class="logoCont rootFlexCC">
+            <img [src]="teamUnit.teamLogoUrl|teamLogo|async">
+          </div>
+          <div class="infoCont">
+            <h3 class="teamName">{{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )</h3>
+            <h2 class="teamName teamUnitName rootFlexSaC">{{ teamUnit.teamUnitName
+              }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{teamUnit.participantIds?.length}}</span></h2>
+          </div>
         </div>
       </div>
       }
