@@ -69,54 +69,100 @@ export class SigleBracketEditorComponent implements OnInit {
   //╘┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅╛
   bracketSize = 2;
   bracketConts: any = [];
-  tempArr2 = [1, 2];
-  teampArr3 = [1, 2, 3];
+  newArray(length: number): number[] {
+    return Array.from({ length: length }, (_, i) => i + 1)
+  }
   changeBrackets(event: any) {
     this.bracketConts = [];
-    console.log(event.target.value);
-    let groups = this.$registeredTeamUnits.length / event.target.value;
+    let totalTeams = this.$registeredTeamUnits.length;
+    let teamsPerGroup = event.target.value;
 
-    switch (event.target.value) {
+    let groups = totalTeams / teamsPerGroup;
+
+
+    switch (teamsPerGroup) {
       case "2": {
-
-        this.checkFor2(this.$registeredTeamUnits.length)
+        this.checkFor2(totalTeams)
         break;
       }
       case "3": {
-        this.checkFor3(11)//this.$registeredTeamUnits.length)
+        this.checkFor3(this.$registeredTeamUnits.length)
+        break;
+      }
+      case "4": {
+        this.checkFor4(6)//this.$registeredTeamUnits.length)
         break;
       }
     }
   }
-  checkFor3(num: number) {
-    let rem = num % 3;
-    if (rem === 1) {
-      let groups = Math.floor(num / 3) - 1;
-      let newNum = num - (groups * 3);
-      for (let i = 1; i <= groups; i++) {
-        this.bracketConts.push(this.teampArr3)
+  checkFor4(teamNumb: number) {
+    let rem = teamNumb % 4;
+    let groups = Math.floor(teamNumb / 4);
+    let newNum = teamNumb - (groups * 4);
+    console.log(0 / 4);
+    console.log(0 % 4);
+    if ((Math.floor(teamNumb / 4)) != 0) {
+
+      if (rem === 1 || rem === 2 || rem == 3) {
+        if (this.checkFor3(newNum)) {
+          for (let i = 1; i <= groups; i++) {
+            this.bracketConts.push(this.newArray(4))
+          }
+        }
+      } else {
+        for (let i = 0; i < teamNumb / 4; i++) {
+          console.log('entramos')
+          this.bracketConts.push(this.newArray(4))
+        }
+        console.log(this.bracketConts)
       }
-      this.checkFor2(newNum)
+    } else {
+      this.err()
+    }
+  }
+  checkFor3(teamNumb: number): boolean {
+    let rem = teamNumb % 3;
+    console.log(rem)
+    if (rem === 1 || rem === 2) {
+      let groups = Math.floor(teamNumb / 3) - 1;
+      if (groups < 0) {
+        this.err();
+        return false;
+      }
+      console.log(groups)
+      let newNum = teamNumb - (groups * 3);
+      if (this.checkFor2(newNum)) {
+        for (let i = 1; i <= groups; i++) {
+          this.bracketConts.push(this.newArray(3))
+        }
+        return true;
+      }
+      else {
+        this.err()
+        console.error(this.checkFor2(newNum))
+        return false;
+      }
 
     } else {
-     /*  
-     for (let i = 1; i <= num / 2; i++) {
-        this.bracketConts.push(this.tempArr2)
-      } 
-        */
+      for (let i = 1; i <= teamNumb / 3; i++) {
+        this.bracketConts.push(this.newArray(3))
+      }
+      return true;
+
     }
-    console.log(this.bracketConts)
   }
-  checkFor2(num: number) {
-    let rem = num % 2;
+  checkFor2(teamNumb: number): boolean {
+    let rem = teamNumb % 2;
     if (rem === 1) {
       this.err()
+      return false;
     } else {
-      for (let i = 1; i <= num / 2; i++) {
-        this.bracketConts.push(this.tempArr2)
+      for (let i = 1; i <= teamNumb / 2; i++) {
+        this.bracketConts.push(this.newArray(2))
       }
+      console.log(this.bracketConts)
+      return true;
     }
-    console.log(this.bracketConts)
   }
   err() {
     alert('Invalid')

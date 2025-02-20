@@ -30,6 +30,14 @@
       <select matNativeControl required (change)="changeBrackets($event)">
         <option value="2">2 Teams</option>
         <option value="3">3 Teams</option>
+        <option value="4">4 Teams</option>
+        <option value="5">5 Teams</option>
+        <option value="6">6 Teams</option>
+        <option value="7">7 Teams</option>
+        <option value="8">8 Teams</option>
+        <option value="9">9 Teams</option>
+        <option value="10">10 Teams</option>
+        <option value="11">11 Teams</option>
       </select>
     </mat-form-field>
     <div cdkDropList [cdkDropListData]="bracketOrder" class="example-list" (cdkDropListDropped)="drop($event)">
@@ -52,3 +60,4 @@
     </div>
   </div>
 </div>
+
