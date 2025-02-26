@@ -1,9 +1,24 @@
 <div cdkDropListGroup>
   <!-- Contenedor para equipos no asignados -->
-  <div class="unnasigned-container rootFlexCC rootFlexCol elevation-z8">
+  <div class="unnasigned-container rootFlexSC rootFlexCol elevation-z8">
     <h2>Unassigned</h2>
-  
-    <div cdkDropList [cdkDropListData]="unassignedUnits" class="unnasigned-drag rootFlexSC  elevation-z3" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList [cdkDropListData]="unassignedUnits" class="unnasigned-drag rootFlexCol rootFlexSC  elevation-z3"
+      (cdkDropListDropped)="drop($event)">
+      <div class="cont1 rootFlexSC rootFlexCol">
+        <h3>Configuration</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Maximum bracket size</mat-label>
+          <input matInput type="number" [(ngModel)]="maxTeamsPerBracket" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Teams</mat-label>
+          <input matInput type="number" [(ngModel)]="numberOfTeams" />
+          <mat-hint> Number of teams </mat-hint>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="test(numberOfTeams, maxTeamsPerBracket)">
+          Generar Brackets
+        </button>
+      </div>
       @for (teamUnit of unassignedUnits; track $index) {
       <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{ 'background-image': returnImage(teamUnit.teamUnitId) }"
         cdkDrag>
@@ -25,33 +40,22 @@
       }
     </div>
   </div>
-  
+
   <!-- Sección de configuración de brackets -->
-  <div class="setContainer">
+  <div class="setContainer  rootFlexSC rootFlexCol elevation-z5">
     <h2>Brackets</h2>
-    <mat-form-field appearance="outline">
-      <mat-label>Maximum bracket size</mat-label>
-      <input matInput type="number" [(ngModel)]="maxTeamsPerBracket" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Teams</mat-label>
-      <input matInput type="number" [(ngModel)]="numberOfTeams" />
-    </mat-form-field>
-  
-    <button mat-raised-button color="primary" (click)="test(numberOfTeams, maxTeamsPerBracket)">
-      Generar Brackets
-    </button>
-  
+
     <!-- Sección de contenedores de brackets generados dinámicamente -->
-    <div class="brackets-container">
+    <div class="brackets-container rootFlexSS rootFlexCol">
+
       @for (bracketGroup of bracketConts; track $index) {
       <div class="bracket-group">
         <h3>Grupo {{$index + 1}} ({{bracketGroup.length}} equipos)</h3>
-        <div cdkDropList [cdkDropListData]="getBracketTeams($index)" class="example-list bracket-list" 
-             (cdkDropListDropped)="dropInBracket($event, $index)">
+        <div cdkDropList [cdkDropListData]="getBracketTeams($index)" class="example-list bracket-list"
+          (cdkDropListDropped)="dropInBracket($event, $index)">
           @for (teamUnit of getBracketTeams($index); track $index) {
-          <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{ 'background-image': returnImage(teamUnit.teamUnitId) }"
-            cdkDrag>
+          <div class="unitCard elevation-z5 rootFlexCC"
+            [ngStyle]="{ 'background-image': returnImage(teamUnit.teamUnitId) }" cdkDrag>
             <div class="whiteB rootFlexSaC">
               <div class="logoCont rootFlexCC">
                 <img [src]="teamUnit.teamLogoUrl | teamLogo | async" />
@@ -78,7 +82,7 @@
       </div>
       }
     </div>
-  
-    
+
+
   </div>
-  </div>
+</div>
