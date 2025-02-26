@@ -1,10 +1,10 @@
 <div cdkDropListGroup>
-  <div class="example-container">
+  <!-- Contenedor para equipos no asignados -->
+  <div class="unnasigned-container rootFlexCC rootFlexCol elevation-z8">
     <h2>Unassigned</h2>
-
-    <div cdkDropList [cdkDropListData]="unassignedUnits" class="example-list" (cdkDropListDropped)="drop($event)">
+  
+    <div cdkDropList [cdkDropListData]="unassignedUnits" class="unnasigned-drag rootFlexSC  elevation-z3" (cdkDropListDropped)="drop($event)">
       @for (teamUnit of unassignedUnits; track $index) {
-      <!-- <pre>{{teamUnit|json}}</pre> -->
       <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{ 'background-image': returnImage(teamUnit.teamUnitId) }"
         cdkDrag>
         <div class="whiteB rootFlexSaC">
@@ -25,56 +25,60 @@
       }
     </div>
   </div>
-
-  <div class="example-container">
+  
+  <!-- Sección de configuración de brackets -->
+  <div class="setContainer">
     <h2>Brackets</h2>
     <mat-form-field appearance="outline">
-      <mat-label>Brackets</mat-label>
-      <input matInput [(ngModel)]="maxTeamsPerBracket" />
+      <mat-label>Maximum bracket size</mat-label>
+      <input matInput type="number" [(ngModel)]="maxTeamsPerBracket" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Teams</mat-label>
-      <input matInput [(ngModel)]="numberOfTeams" />
+      <input matInput type="number" [(ngModel)]="numberOfTeams" />
     </mat-form-field>
-
-    <button mat-raised-button (click)="test(numberOfTeams,maxTeamsPerBracket)">Save</button>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Máximum bracket size {{ bracketSize }}</mat-label>
-      <select matNativeControl required (change)="changeBrackets($event)">
-        <option value="2">2 Teams</option>
-        <option value="3">3 Teams</option>
-        <option value="4">4 Teams</option>
-        <option value="5">5 Teams</option>
-        <option value="6">6 Teams</option>
-        <option value="7">7 Teams</option>
-        <option value="8">8 Teams</option>
-        <option value="9">9 Teams</option>
-        <option value="10">10 Teams</option>
-        <option value="11">11 Teams</option>
-      </select>
-    </mat-form-field>
-    <div cdkDropList [cdkDropListData]="bracketOrder" class="example-list" (cdkDropListDropped)="drop($event)">
-      @for (teamUnit of bracketOrder; track $index) {
-      <!-- <pre>{{teamUnit|json}}</pre> -->
-      <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{ 'background-image': returnImage(teamUnit.teamUnitId) }"
-        cdkDrag>
-        <div class="whiteB rootFlexSaC">
-          <div class="logoCont rootFlexCC">
-            <img [src]="teamUnit.teamLogoUrl | teamLogo | async" />
+  
+    <button mat-raised-button color="primary" (click)="test(numberOfTeams, maxTeamsPerBracket)">
+      Generar Brackets
+    </button>
+  
+    <!-- Sección de contenedores de brackets generados dinámicamente -->
+    <div class="brackets-container">
+      @for (bracketGroup of bracketConts; track $index) {
+      <div class="bracket-group">
+        <h3>Grupo {{$index + 1}} ({{bracketGroup.length}} equipos)</h3>
+        <div cdkDropList [cdkDropListData]="getBracketTeams($index)" class="example-list bracket-list" 
+             (cdkDropListDropped)="dropInBracket($event, $index)">
+          @for (teamUnit of getBracketTeams($index); track $index) {
+          <div class="unitCard elevation-z5 rootFlexCC" [ngStyle]="{ 'background-image': returnImage(teamUnit.teamUnitId) }"
+            cdkDrag>
+            <div class="whiteB rootFlexSaC">
+              <div class="logoCont rootFlexCC">
+                <img [src]="teamUnit.teamLogoUrl | teamLogo | async" />
+              </div>
+              <div class="infoCont">
+                <h3 class="teamName">
+                  {{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )
+                </h3>
+                <h2 class="teamName teamUnitName rootFlexSaC">
+                  {{ teamUnit.teamUnitName
+                  }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{ teamUnit.participantIds?.length }}</span>
+                </h2>
+              </div>
+            </div>
           </div>
-          <div class="infoCont">
-            <h3 class="teamName">
-              {{ teamUnit.teamName }}&nbsp; ( {{ teamUnit.teamAbbreviation }} )
-            </h3>
-            <h2 class="teamName teamUnitName rootFlexSaC">
-              {{ teamUnit.teamUnitName
-              }}<span class="rootFlexCC"><mat-icon>group</mat-icon>{{ teamUnit.participantIds?.length }}</span>
-            </h2>
+          }
+          <!-- Placeholder para mostrar espacios vacíos en el grupo -->
+          @for (empty of getEmptySlots($index); track $index) {
+          <div class="empty-slot">
+            <p>Arrastra un equipo aquí</p>
           </div>
+          }
         </div>
       </div>
       }
     </div>
+  
+    
   </div>
-</div>
+  </div>

@@ -79,24 +79,76 @@ export class SigleBracketEditorComponent implements OnInit {
   //╘┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅ ┅╛
   bracketSize = 2;
   bracketConts: any = [];
+  maxTeamsPerBracket: number = 0;
+  numberOfTeams: number = 0;
+  // Estructura para almacenar equipos asignados a cada bracket
+bracketTeams: any[][] = [];
 
-  maxTeamsPerBracket!: number;
-  numberOfTeams!: number;
+// Obtener los equipos asignados a un bracket específico
+getBracketTeams(bracketIndex: number): any[] {
+  if (!this.bracketTeams[bracketIndex]) {
+    this.bracketTeams[bracketIndex] = [];
+  }
+  return this.bracketTeams[bracketIndex];
+}
+
+// Obtener el número de espacios vacíos para un bracket
+getEmptySlots(bracketIndex: number): number[] {
+  if (!this.bracketConts[bracketIndex]) {
+    return [];
+  }
+  
+  const totalSlots = this.bracketConts[bracketIndex].length;
+  const filledSlots = this.getBracketTeams(bracketIndex).length;
+  const emptySlots = totalSlots - filledSlots;
+  
+  // Retorna un array del tamaño de los espacios vacíos para iterar en el template
+  return emptySlots > 0 ? new Array(emptySlots).fill(0) : [];
+}
+
+// Manejar el drop de equipos en un bracket específico
+dropInBracket(event: CdkDragDrop<any[]>, bracketIndex: number) {
+  if (event.previousContainer === event.container) {
+    // Reordenar dentro del mismo bracket
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    // Verificar si el bracket ya está lleno
+    if (this.bracketTeams[bracketIndex].length >= this.bracketConts[bracketIndex].length) {
+      // Bracket lleno, no permitir más equipos
+      return;
+    }
+    
+    // Transferir de otro contenedor al bracket
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+}
+
+// Modificar el método test para reiniciar los equipos de los brackets
+test(teamNumber: number, maxGroup: number) {
+  this.maxTeamsPerBracket = maxGroup;
+  console.log(teamNumber);
+  console.log(maxGroup);
+  this.checkTeams(teamNumber, maxGroup);
+  let nTeams = 0;
+  this.bracketConts.forEach((cont: any) => {
+    nTeams += cont.length;
+  });
+  console.log(this.bracketConts);
+  console.log(nTeams);
+  
+  // Reiniciar los equipos asignados a los brackets
+  this.bracketTeams = new Array(this.bracketConts.length).fill(null).map(() => []);
+}
+
   newArray(length: number): number[] {
     return Array.from({ length: length }, (_, i) => i + 1);
   }
-  test(teamNumber: number, maxGroup: number) {
-    this.maxTeamsPerBracket = maxGroup;
-    console.log(teamNumber);
-    console.log(maxGroup);
-    this.checkTeams(teamNumber, maxGroup);
-    let nTeams = 0;
-    this.bracketConts.forEach((cont: any) => {
-      nTeams += cont.length;
-    });
-    console.log(this.bracketConts);
-    console.log(nTeams);
-  }
+
   changeBrackets(event: any) {
     this.bracketConts = [];
     let totalTeams = this.$registeredTeamUnits.length;
